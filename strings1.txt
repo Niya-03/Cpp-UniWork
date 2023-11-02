@@ -1,0 +1,53 @@
+Задача 1:
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "");
+	string email;
+	cout << "enter email" << endl;
+	cin >> email;
+	int index1 = email.find("@");
+	string user = email.substr(0,index1);
+	string server = email.substr(index1 + 1);
+	int index2 = email.find(".");
+	string nationality = email.substr(index2+1);
+	
+	cout << "Потребител: " << user << endl;
+	cout << "Сървър: " << server << endl;
+	cout << "Националност: " << nationality << endl;
+}
+
+Задача 2:
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "");
+	
+	string url;
+	cout << "enter url" << endl;
+	cin >> url;
+
+	int indexProtocol = url.find(":");
+	string protocol = url.substr(0,indexProtocol);
+
+	int indexHost = url.find("/", indexProtocol + 3);
+	string host = url.substr(indexProtocol + 3, indexHost-(indexProtocol+3));
+
+	int indexFile = url.rfind("/");
+	string file = url.substr(indexFile+1);
+
+	string way = url.substr(indexHost+1,indexFile - (indexHost+1) );
+	
+	cout << "Протокол: " << protocol << endl;
+	cout << "Хост: " << host << endl;
+	cout << "Път: " << way << endl;
+	cout << "Файл: " << file <<endl;	
+}

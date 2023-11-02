@@ -1,0 +1,62 @@
+задача 1:
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main()
+{
+    string filename = "d:\\data\\dom.txt";
+    fstream fp;
+    fp.open(filename, ios::in);
+    string line;
+    string text;
+
+    while (!fp.eof()) {
+        getline(fp, line);
+        text += line;
+        text += " ";
+    }
+
+    text = text.substr(0,text.length()-1);
+
+    cout << text << "." << endl;
+
+    fp.close();
+}
+
+задача 2:
+
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main()
+{
+    string filename = "d:\\data\\dom.txt";
+    fstream fp;
+    fp.open(filename, ios::out);
+    string text;
+    string mask = " .,!?:=;\"0123456789";
+    getline(cin, text);
+    string word;
+    int count = 0;
+
+    size_t begin, end = 0;
+
+    while ((begin = text.find_first_not_of(mask, end)) != string::npos) {
+        end = text.find_first_of(mask, begin);
+        word = text.substr(begin, end - begin);
+        fp << word << " ";
+
+        count++;
+
+        if (count == 3) {
+            count = 0;
+            fp << "\n";
+        }
+    }
+   
+    fp.close();
+}

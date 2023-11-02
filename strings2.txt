@@ -1,0 +1,62 @@
+задача 1:
+int main()
+{
+    string text;
+    cout << "enter text" << endl;
+    getline(cin, text);
+    size_t beginning, end = 0 ;
+    size_t beginningnew, endnew = 0;
+    string mask = " .,!?:=;\"0123456789";
+    int size=0;
+    string current;
+    string newword;
+    string longest;
+   
+    while ((beginning = text.find_first_not_of(mask, end)) != string::npos) {
+
+       end = text.find_first_of(mask, beginning);
+       current= text.substr(beginning, end - beginning) ;
+       endnew = end;
+
+       while ((beginningnew = text.find_first_not_of(mask, endnew)) != string::npos) {
+
+           endnew = text.find_first_of(mask, beginningnew);
+           newword = text.substr(beginningnew, endnew - beginningnew);
+
+           if (newword.length() >= current.length()) {
+               longest = newword;
+           }
+
+       }
+    }
+    cout << longest;
+}
+
+
+задача 2:
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	cout << "enter text: ";
+	string text;
+	getline(cin, text);
+	size_t pos;
+	pos = text.find_first_of("1234567890");
+
+	while (pos != string::npos) {
+		text.replace(pos, 1, "*");
+		pos = text.find_first_of("1234567890");
+	}
+
+	for (int i = 0; i < text.size() - 1; i++) {
+		if ((text[i] == '*') && (text[i + 1] == '*')) {
+			text.replace(i, 1, "*");
+			i--;
+		}
+	}
+	cout << text;	
+}
